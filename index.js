@@ -8,7 +8,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 const route = express.Router()
 
-const port = 3010
+const port = process.env.PORT || 3010
 
 app.use('/v1', route)
 
@@ -26,6 +26,11 @@ const transporter = nodemailer.createTransport({
         user: process.env.GMAIL_USER,
         pass: process.env.GMAIL_PASS,
     },
+})
+
+
+app.get('/', (req, res) => {
+    res.send('hello world работает')
 })
 
 
