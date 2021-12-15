@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const nodemailer = require('nodemailer')
 const app = express()
+const cors = require('cors')
 require('dotenv').config()
 // Parse incoming requests data (https://github.com/expressjs/body-parser)
 app.use(bodyParser.json())
@@ -11,6 +12,8 @@ const route = express.Router()
 const port = process.env.PORT || 3010
 
 app.use('/v1', route)
+app.use(cors({origin: 'https://github.com/Smazhevskiy'}))
+
 
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`)
