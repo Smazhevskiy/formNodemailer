@@ -3,16 +3,19 @@ const bodyParser = require('body-parser')
 const nodemailer = require('nodemailer')
 const app = express()
 const cors = require('cors')
+const route = express.Router()
 require('dotenv').config()
+const port = process.env.PORT || 3010
 // Parse incoming requests data (https://github.com/expressjs/body-parser)
+
 
 app.use('/v1', route)
 app.use(cors({origin: 'https://github.com/Smazhevskiy'}))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
-const route = express.Router()
 
-const port = process.env.PORT || 3010
+
+
 
 
 
