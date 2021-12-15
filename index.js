@@ -5,14 +5,16 @@ const app = express()
 const cors = require('cors')
 require('dotenv').config()
 // Parse incoming requests data (https://github.com/expressjs/body-parser)
+
+app.use('/v1', route)
+app.use(cors({origin: 'https://github.com/Smazhevskiy'}))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 const route = express.Router()
 
 const port = process.env.PORT || 3010
 
-app.use('/v1', route)
-app.use(cors({origin: 'https://github.com/Smazhevskiy'}))
+
 
 
 app.listen(port, () => {
@@ -52,7 +54,7 @@ app.post('/sendMessage', async (req, res) => {
 
     await transporter.sendMail(mailData, (error, info) => {
         if(error) {
-            res.status(400).send({error: 'Ошибка'})
+            res.status(400).send({error: error})
             return console.log(error)
         }
         res.status(200).send({message: 'Mail send'})
