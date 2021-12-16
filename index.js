@@ -6,10 +6,11 @@ const app = express()
 require('dotenv').config()
 
 app.use(express.json())
-app.use(cors({origin: 'https://github.com/Smazhevskiy'}))
+app.use(cors()) //{origin: 'https://github.com/Smazhevskiy'}
+app.options('*', cors());
 
 
-app.get('/', (req, res) => {
+app.get('/', cors(), (req, res) => {
     res.send('hello world работает')
 })
 
@@ -26,7 +27,7 @@ const transporter = nodemailer.createTransport({
 })
 
 
-app.post('/sendMessage',  async (req, res) => {
+app.post('/sendMessage', cors(),  async (req, res) => {
     const {name, contacts, message} = req.body
 
     const mailData = {
