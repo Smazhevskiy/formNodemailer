@@ -30,7 +30,6 @@ const mailData = (name, contacts, message) => {
 }
 
 
-
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     tls: {
@@ -47,10 +46,11 @@ app.post('/sendMessage', cors(), async (req, res) => {
     const {name, contacts, message} = req.body
     await transporter.sendMail(mailData(name, contacts, message), (error, info) => {
         if(error) {
-            res.status(400).send({error: error})
+            res.status(400).send({error: error, success: false})
             return console.log(error)
         }
-        res.status(200).send({message: 'Mail send' + info})
+        res.status(200).send({message: 'Mail send', success: true})
+        res.send('Письмо успешно отправлено')
     })
 })
 
