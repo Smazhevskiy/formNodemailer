@@ -1,6 +1,7 @@
 const express = require('express')
 const nodemailer = require('nodemailer')
 const cors = require('cors')
+const {HtmlMail} = require('./htmlMail')
 const port = process.env.PORT || 3010
 const app = express()
 require('dotenv').config()
@@ -21,10 +22,7 @@ const mailData = (name, contacts, message) => {
             from: 'Письмо с формы обратной связи',
             subject: 'HR WANTS ME',
             to: process.env.MAIL_TO || 'a.zmashevskiy@gmail.com',
-            html: `<b>Yoo</b>
-<div>name: ${name}</div>
-<div>contacts: ${contacts}</div>
-<div>message: ${message}</div>`,
+            html: HtmlMail,
         }
     )
 }
